@@ -5,6 +5,7 @@ $route['checkUser'] = 'login';
 $route['dashboard'] = 'dashboard';
 $route['logout']    = 'dashboard/logout';
 $route['create']    =  'ticket/create';
+$route['tickets']   = 'ticket/list';
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';

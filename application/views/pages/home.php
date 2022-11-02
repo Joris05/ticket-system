@@ -5,7 +5,7 @@
         <div class="col-md-6 col-lg-4">
             <div class="wrimagecard wrimagecard-topimage">
                 <div class="wrimagecard-topimage_header">
-                    <i class="fas fa-users cardIcon"></i>
+                    <i class="bi bi-users cardIcon"></i>
                 </div>
                 <div class="wrimagecard-topimage_title h-140">
                     <h2 class="h4 text-center">
