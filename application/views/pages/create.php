@@ -11,6 +11,9 @@
                 <label class="form-label">Department</label>
                 <select class="form-select">
                     <option>Select</option>
+                    <?php foreach ($departments as $department) { ?>
+                        <option value="<?= $department['department_id']; ?>"><?= $department['department_name']; ?></option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="mb-3">

@@ -7,6 +7,7 @@ class Dashboard extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('ticket_model', 'ticket');
         $this->check_isvalidated();
     }
 
@@ -20,6 +21,8 @@ class Dashboard extends CI_Controller
     public function index()
     {
         $data['title'] = 'Home';
+        $data['open'] = count($this->ticket->ticket_by_deparment_status('1', 'Open'));
+        $data['close'] = count($this->ticket->ticket_by_deparment_status('1', 'Partially close'));
         $this->load->view('template/header', $data);
         $this->load->view('pages/home');
         $this->load->view('template/footer');

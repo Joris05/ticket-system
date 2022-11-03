@@ -11,7 +11,7 @@
                     <h2 class="h4 text-center">
                         Open
                     </h2>
-                    <h1><span class="badge bg-success">0</span></h1>
+                    <h1><span class="badge bg-success"><?= $open; ?></span></h1>
                 </div>
                 <div class="card-action-bar">
                     <a class="float-lg-none link">View more</a>
@@ -27,7 +27,7 @@
                     <h2 class="h4 text-center">
                         Partially Closed
                     </h2>
-                    <h1><span class="badge bg-danger">0</span></h1>
+                    <h1><span class="badge bg-danger"><?= $close; ?></span></h1>
                 </div>
                 <div class="card-action-bar">
                     <a class="float-right link">View more</a>
@@ -37,4 +37,24 @@
     </div>
     <h4 class="display-4" style="font-size: 2rem;">New Ticket</h4>
     <hr>
+    <div class="col-md-12 col-lg-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

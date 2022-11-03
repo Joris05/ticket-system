@@ -7,6 +7,7 @@ class Ticket extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('department_model', 'department');
         $this->check_isvalidated();
     }
 
@@ -20,8 +21,9 @@ class Ticket extends CI_Controller
     public function create()
     {
         $data['title'] = 'Create Ticket';
+        $data['departments'] = $this->department->department_list();
         $this->load->view('template/header', $data);
-        $this->load->view('pages/create');
+        $this->load->view('pages/create', $data);
         $this->load->view('template/footer');
     }
 
