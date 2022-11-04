@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <h4 class="display-4" style="font-size: 2rem;">New Ticket</h4>
+    <h4 class="display-4" style="font-size: 2rem;">New Tickets</h4>
     <hr>
     <div class="col-md-12 col-lg-12">
         <table class="table">
@@ -43,17 +43,26 @@
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Message</th>
+                    <th scope="col">Department</th>
                     <th scope="col">Date</th>
                     <th scope="col">Status</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
+                <?php
+                    foreach ($tickets as $ticket) {
+                        $color = ($ticket['status']==='Open')?'text-success':'text-danger';
+                        $user = $this->user->get_user($ticket['user_id']);
+                        $department = $this->department->get_deparment($user->department_id);
+                ?>
+                    <tr onclick="window.location='<?= base_url();?>ticket/view/<?= $ticket['id']; ?>'">
+                        <td><?= $ticket['title']; ?></td>
+                        <td><?= $ticket['msg']; ?></td>
+                        <td><?=  $department->department_name; ?></td>
+                        <td><?= date('F d, Y h:ia', strtotime($ticket['date_created'])); ?></td>
+                        <td class="<?= $color; ?>"><?= $ticket['status']; ?></td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>

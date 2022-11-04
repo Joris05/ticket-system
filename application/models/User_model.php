@@ -14,4 +14,12 @@ class User_model extends CI_Model
         $q = $this->db->get('users');
         return $q->row();
     }
+
+    public function get_user($id)
+    {
+        $this->db->select('*');
+        $this->db->where('user_id', $id);
+        $q = $this->db->get('users');
+        return $q->row();
+    }
 }

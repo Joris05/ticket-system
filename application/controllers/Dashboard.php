@@ -8,6 +8,8 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ticket_model', 'ticket');
+        $this->load->model('user_model', 'user');
+        $this->load->model('department_model', 'department');
         $this->check_isvalidated();
     }
 
@@ -21,10 +23,11 @@ class Dashboard extends CI_Controller
     public function index()
     {
         $data['title'] = 'Home';
-        $data['open'] = count($this->ticket->ticket_by_deparment_status('1', 'Open'));
-        $data['close'] = count($this->ticket->ticket_by_deparment_status('1', 'Partially close'));
+        $data['open'] = count($this->ticket->ticket_by_deparment_status($this->session->userdata('department_id'), 'Open'));
+        $data['close'] = count($this->ticket->ticket_by_deparment_status($this->session->userdata('department_id'), 'Partially closed'));
+        $data['tickets'] = $this->ticket->ticket_list_by_department($this->session->userdata('department_id'));
         $this->load->view('template/header', $data);
-        $this->load->view('pages/home');
+        $this->load->view('pages/home', $data);
         $this->load->view('template/footer');
     }
 

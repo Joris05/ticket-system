@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ticket System - <?= $title; ?></title>
     <!-- Bootstrap core CSS -->
-    <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Favicons -->
     <link rel="icon" href="<?= base_url() ?>assets/images/ticket-icon.png">
     <meta name="theme-color" content="#7952b3">
@@ -328,6 +328,8 @@
         span.fa-3x.mb-auto.mt-auto {
             color: black;
         }
+
+        tr:hover { cursor: pointer; }
     </style>
 
 
@@ -351,8 +353,21 @@
                     <li class="nav-item">
                         <a href="<?= base_url(); ?>tickets" class="nav-link m-2 menu-item">Tickets</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url(); ?>logout" class="nav-link m-2 menu-item">Logout</a>
+                    <?php
+                    if($this->session->userdata('utype')==='admin'){
+                    ?>
+                        <li class="nav-item">
+                            <a href="<?= base_url(); ?>admin/dashboard" class="nav-link m-2 menu-item">Admin</a>
+                        </li>
+                    <?php } ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link m-2 menu-item dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                           Welcome back <?= $this->session->userdata('username'); ?>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Account</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url(); ?>logout">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
