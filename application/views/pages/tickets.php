@@ -12,9 +12,9 @@
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                    foreach ($tickets as $ticket) { 
-                        $color = ($ticket['status']==='Open')?'text-success':'text-danger';
+                <?php
+                foreach ($tickets as $ticket) {
+                    $color = ($ticket['status'] === 'Open') ? 'text-success' : 'text-danger';
                 ?>
                     <tr>
                         <td><?= $ticket['title']; ?></td>
@@ -25,7 +25,7 @@
                 <?php } ?>
             </tbody>
         </table>
-    </div>    
+    </div>
     <h4 class="display-4 mt-5" style="font-size: 2rem;"><?= @$title; ?></h4>
     <hr>
     <div class="col-md-12 col-lg-12">
@@ -34,10 +34,10 @@
                 <label class="col-form-label">Status</label>
             </div>
             <div class="col-auto">
-                <select class="form-select">
-                    <option>All</option>
-                    <option>Open</option>
-                    <option>Partially Close</option>
+                <select class="form-select" onchange="window.location='<?= base_url(); ?>tickets/' + this.value">
+                    <option value="all" <?= ($params === 'All') ? 'selected' : ''; ?>>All</option>
+                    <option value="open" <?= ($params === 'open') ? 'selected' : ''; ?>>Open</option>
+                    <option value="close" <?= ($params === 'close') ? 'selected' : ''; ?>>Partially Close</option>
                 </select>
             </div>
             <div class="col-auto">
@@ -56,32 +56,32 @@
             </div>
         </div>
     </div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Message</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Status</th>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Message</th>
+                <th scope="col">Department</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($ticketsDepartment as $tickets) {
+                $color = ($tickets['status'] === 'Open') ? 'text-success' : 'text-danger';
+                $user = $this->user->get_user($tickets['user_id']);
+                $department = $this->department->get_deparment($user->department_id);
+            ?>
+                <tr onclick="window.location='<?= base_url(); ?>ticket/view/<?= $tickets['id']; ?>'">
+                    <td><?= $tickets['title']; ?></td>
+                    <td><?= $tickets['msg']; ?></td>
+                    <td><?= $department->department_name; ?></td>
+                    <td><?= date('F d, Y h:ia', strtotime($tickets['date_created'])); ?></td>
+                    <td class="<?= $color; ?>"><?= $tickets['status']; ?></td>
                 </tr>
-            </thead>
-            <tbody>
-                <?php
-                    foreach ($ticketsDepartment as $tickets) {
-                        $color = ($tickets['status']==='Open')?'text-success':'text-danger';
-                        $user = $this->user->get_user($tickets['user_id']);
-                        $department = $this->department->get_deparment($user->department_id);
-                ?>
-                    <tr  onclick="window.location='<?= base_url();?>ticket/view/<?= $tickets['id']; ?>'">
-                        <td><?= $tickets['title']; ?></td>
-                        <td><?= $tickets['msg']; ?></td>
-                        <td><?=  $department->department_name; ?></td>
-                        <td><?= date('F d, Y h:ia', strtotime($tickets['date_created'])); ?></td>
-                        <td class="<?= $color; ?>"><?= $tickets['status']; ?></td>
-                    </tr>
             <?php } ?>
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 </div>

@@ -5,7 +5,7 @@
         <div class="col-md-6 col-lg-4">
             <div class="wrimagecard wrimagecard-topimage">
                 <div class="wrimagecard-topimage_header">
-                    <i class="bi bi-users cardIcon"></i>
+                    <i class="fas fa-lock-open cardIcon"></i>
                 </div>
                 <div class="wrimagecard-topimage_title h-140">
                     <h2 class="h4 text-center">
@@ -14,14 +14,14 @@
                     <h1><span class="badge bg-success"><?= $open; ?></span></h1>
                 </div>
                 <div class="card-action-bar">
-                    <a class="float-lg-none link">View more</a>
+                    <a class="float-lg-none link" onclick="window.location='<?= base_url(); ?>tickets/open'">View more</a>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-lg-4">
             <div class="wrimagecard wrimagecard-topimage">
                 <div class="wrimagecard-topimage_header">
-                    <i class="fas fa-desktop cardIcon"></i>
+                    <i class="fas fa-lock cardIcon"></i>
                 </div>
                 <div class="wrimagecard-topimage_title h-140">
                     <h2 class="h4 text-center">
@@ -30,7 +30,7 @@
                     <h1><span class="badge bg-danger"><?= $close; ?></span></h1>
                 </div>
                 <div class="card-action-bar">
-                    <a class="float-right link">View more</a>
+                    <a class="float-right link" onclick="window.location='<?= base_url(); ?>tickets/close'">View more</a>
                 </div>
             </div>
         </div>
@@ -50,15 +50,15 @@
             </thead>
             <tbody>
                 <?php
-                    foreach ($tickets as $ticket) {
-                        $color = ($ticket['status']==='Open')?'text-success':'text-danger';
-                        $user = $this->user->get_user($ticket['user_id']);
-                        $department = $this->department->get_deparment($user->department_id);
+                foreach ($tickets as $ticket) {
+                    $color = ($ticket['status'] === 'Open') ? 'text-success' : 'text-danger';
+                    $user = $this->user->get_user($ticket['user_id']);
+                    $department = $this->department->get_deparment($user->department_id);
                 ?>
-                    <tr onclick="window.location='<?= base_url();?>ticket/view/<?= $ticket['id']; ?>'">
+                    <tr onclick="window.location='<?= base_url(); ?>ticket/view/<?= $ticket['id']; ?>'">
                         <td><?= $ticket['title']; ?></td>
                         <td><?= $ticket['msg']; ?></td>
-                        <td><?=  $department->department_name; ?></td>
+                        <td><?= $department->department_name; ?></td>
                         <td><?= date('F d, Y h:ia', strtotime($ticket['date_created'])); ?></td>
                         <td class="<?= $color; ?>"><?= $ticket['status']; ?></td>
                     </tr>

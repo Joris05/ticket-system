@@ -20,7 +20,7 @@ class Ticket extends CI_Controller
         }
     }
 
-    public function create($errors=null)
+    public function create($errors = null)
     {
         $data['title'] = 'Create Ticket';
         $data['error'] = $errors;
@@ -30,15 +30,23 @@ class Ticket extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function list()
+    public function list($cond)
     {
-        $data['title'] = 'All Tickets';
-        $data['tickets'] = $this->ticket->ticket_list($this->session->userdata('userid'));
-        $data['ticketsDepartment'] = $this->ticket->ticket_list_by_department($this->session->userdata('department_id'));
-        $data['departments'] = $this->department->department_list($this->session->userdata('department_id'));
-        $this->load->view('template/header', $data);
-        $this->load->view('pages/tickets', $data);
-        $this->load->view('template/footer');
+        if (!empty($cond)) {
+            $data['title'] = 'All Tickets';
+            $data['tickets'] = $this->ticket->ticket_list($this->session->userdata('userid'));
+            $data['params'] = $cond;
+            if ($cond === 'all') {
+                $data['ticketsDepartment'] = $this->ticket->ticket_list_by_department($this->session->userdata('department_id'));
+            } else {
+                $cond = ($cond === 'close') ? 'Partially closed' : 'Open';
+                $data['ticketsDepartment'] = $this->ticket->ticket_by_deparment_status($this->session->userdata('department_id'), $cond);
+            }
+            $data['departments'] = $this->department->department_list($this->session->userdata('department_id'));
+            $this->load->view('template/header', $data);
+            $this->load->view('pages/tickets', $data);
+            $this->load->view('template/footer');
+        }
     }
 
     public function store()
@@ -69,7 +77,7 @@ class Ticket extends CI_Controller
 
             $check = $this->ticket->get_ticket_title($title, 'Open');
 
-            if($check) {
+            if ($check) {
                 $errors = '<li>You have a open ticket for this request. Please contact the department for the updates.</li>';
                 $this->create($errors);
             } else {
@@ -80,7 +88,7 @@ class Ticket extends CI_Controller
                     'user_id' => $this->session->userdata('userid'),
                 );
                 $insert  = $this->ticket->insert_ticket($data);
-                if($insert){
+                if ($insert) {
                     $this->list();
                 } else {
                     $errors = '<li>Unable to submit your request. please contact the IT System Adminstrator.</li>';
@@ -92,10 +100,10 @@ class Ticket extends CI_Controller
 
     public function view($id)
     {
-        if($id){
+        if ($id) {
             $data['title'] = 'View Ticket';
             $this->load->view('template/header', $data);
-            if($this->ticket->get_ticket($id, $this->session->userdata('department_id'))){
+            if ($this->ticket->get_ticket($id, $this->session->userdata('department_id'))) {
                 $data['ticket'] = $this->ticket->get_ticket($id, $this->session->userdata('department_id'));
                 $this->load->view('pages/view_ticket', $data);
             }
@@ -105,10 +113,10 @@ class Ticket extends CI_Controller
 
     public function status($id, $status)
     {
-        if($id && $status){
-            $where = 'id = "'.$id.'"';
+        if ($id && $status) {
+            $where = 'id = "' . $id . '"';
             $data = array(
-                'status' => ($status==='close') ? 'Partially closed' : 'Open'
+                'status' => ($status === 'close') ? 'Partially closed' : 'Open'
             );
             $this->ticket->update_ticket($data, $where);
             $this->view($id);

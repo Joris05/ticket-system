@@ -7,6 +7,7 @@
     <title>Ticket System - <?= $title; ?></title>
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>assets/css/fonts.css" rel="stylesheet">
     <!-- Favicons -->
     <link rel="icon" href="<?= base_url() ?>assets/images/ticket-icon.png">
     <meta name="theme-color" content="#7952b3">
@@ -329,7 +330,9 @@
             color: black;
         }
 
-        tr:hover { cursor: pointer; }
+        tr:hover {
+            cursor: pointer;
+        }
     </style>
 
 
@@ -348,25 +351,34 @@
             <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
                 <ul class="navbar-nav ms-auto flex-nowrap">
                     <li class="nav-item">
-                        <a href="<?= base_url(); ?>create" class="nav-link m-2 menu-item">Create Ticket</a>
+                        <a href="<?= base_url(); ?>create" class="nav-link m-2 menu-item">
+                            <i class="fas fa-plus"></i> Create Ticket
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url(); ?>tickets" class="nav-link m-2 menu-item">Tickets</a>
+                        <a href="<?= base_url(); ?>tickets/all" class="nav-link m-2 menu-item">
+                            <i class="fas fa-ticket-alt"></i> Tickets
+                        </a>
                     </li>
                     <?php
-                    if($this->session->userdata('utype')==='admin'){
+                    if ($this->session->userdata('utype') === 'admin') {
                     ?>
                         <li class="nav-item">
-                            <a href="<?= base_url(); ?>admin/dashboard" class="nav-link m-2 menu-item">Admin</a>
+                            <a href="<?= base_url(); ?>admin/dashboard" class="nav-link m-2 menu-item">
+                                <i class="fas fa-cog"></i> Admin
+                            </a>
                         </li>
                     <?php } ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link m-2 menu-item dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                           Welcome back <?= $this->session->userdata('username'); ?>
+                            Welcome back <?= $this->session->userdata('username'); ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Account</a></li>
-                            <li><a class="dropdown-item" href="<?= base_url(); ?>logout">Logout</a></li>
+                            <li>
+                                <a class="dropdown-item" href="<?= base_url(); ?>logout">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
