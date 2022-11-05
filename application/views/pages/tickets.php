@@ -44,7 +44,7 @@
                 <label class="col-form-label">Department</label>
             </div>
             <div class="col-auto">
-                <select class="form-select">
+                <select class="form-select" onchange="window.location='<?= base_url(); ?>tickets/filter/' + this.value + '/<?= $params;?>'">
                     <option>All</option>
                     <?php foreach ($departments as $department) { ?>
                         <option value="<?= $department['department_id']; ?>"><?= $department['department_name']; ?></option>

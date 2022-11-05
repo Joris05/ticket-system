@@ -49,6 +49,21 @@ class Ticket extends CI_Controller
         }
     }
 
+    public function filter($cond1, $cond2)
+    {
+        if($cond1 && $cond2) {
+            $data['title'] = 'All Tickets';
+            $data['params'] = $cond2;
+            $data['tickets'] = $this->ticket->ticket_list($this->session->userdata('userid'));
+            $cond2 = ($cond2 === 'close') ? 'Partially closed' : 'Open';
+            $data['ticketsDepartment'] = $this->ticket->ticket_by_deparment_status($cond1, $cond2);
+            $data['departments'] = $this->department->department_list($this->session->userdata('department_id'));
+            $this->load->view('template/header', $data);
+            $this->load->view('pages/tickets', $data);
+            $this->load->view('template/footer');
+        }
+    }
+
     public function store()
     {
         $this->form_validation->set_rules(
