@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <h4 class="display-4" style="font-size: 2rem;">New Tickets</h4>
+    <h4 class="display-4" style="font-size: 2rem;">Today's Tickets</h4>
     <hr>
     <div class="col-md-12 col-lg-12">
         <table class="table">

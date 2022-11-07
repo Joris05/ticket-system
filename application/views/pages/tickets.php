@@ -44,7 +44,7 @@
                 <label class="col-form-label">Department</label>
             </div>
             <div class="col-auto">
-                <select class="form-select" onchange="window.location='<?= base_url(); ?>tickets/filter/' + this.value + '/<?= $params;?>'">
+                <select class="form-select" onchange="window.location='<?= base_url(); ?>tickets/filter/' + this.value + '/<?= $params; ?>'">
                     <option>All</option>
                     <?php foreach ($departments as $department) { ?>
                         <option value="<?= $department['department_id']; ?>"><?= $department['department_name']; ?></option>
@@ -71,12 +71,12 @@
             foreach ($ticketsDepartment as $tickets) {
                 $color = ($tickets['status'] === 'Open') ? 'text-success' : 'text-danger';
                 $user = $this->user->get_user($tickets['user_id']);
-                $department = $this->department->get_deparment($user->department_id);
+                $department = $this->department->get_department($user->department_id);
             ?>
                 <tr onclick="window.location='<?= base_url(); ?>ticket/view/<?= $tickets['id']; ?>'">
                     <td><?= $tickets['title']; ?></td>
                     <td><?= $tickets['msg']; ?></td>
-                    <td><?= $department->department_name; ?></td>
+                    <td><?= @$department->department_name; ?></td>
                     <td><?= date('F d, Y h:ia', strtotime($tickets['date_created'])); ?></td>
                     <td class="<?= $color; ?>"><?= $tickets['status']; ?></td>
                 </tr>

@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+date_default_timezone_set('Asia/Manila');
 class Ticket extends CI_Controller
 {
 
@@ -51,7 +51,7 @@ class Ticket extends CI_Controller
 
     public function filter($cond1, $cond2)
     {
-        if($cond1 && $cond2) {
+        if ($cond1 && $cond2) {
             $data['title'] = 'All Tickets';
             $data['params'] = $cond2;
             $data['tickets'] = $this->ticket->ticket_list($this->session->userdata('userid'));
@@ -104,7 +104,7 @@ class Ticket extends CI_Controller
                 );
                 $insert  = $this->ticket->insert_ticket($data);
                 if ($insert) {
-                    $this->list();
+                    $this->list('all');
                 } else {
                     $errors = '<li>Unable to submit your request. please contact the IT System Adminstrator.</li>';
                     $this->create($errors);
@@ -130,9 +130,17 @@ class Ticket extends CI_Controller
     {
         if ($id && $status) {
             $where = 'id = "' . $id . '"';
-            $data = array(
-                'status' => ($status === 'close') ? 'Partially closed' : 'Open'
-            );
+            ($status === 'close') ?
+
+                $data = array(
+                    'status' => ($status === 'close') ? 'Partially closed' : 'Open',
+                    'date_modified' => date("Y-m-d H:i:s")
+                )
+                :
+                $data = array(
+                    'status' => ($status === 'close') ? 'Partially closed' : 'Open'
+                );
+
             $this->ticket->update_ticket($data, $where);
             $this->view($id);
         }

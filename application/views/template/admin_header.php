@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Dashboard Template · Bootstrap v5.0</title>
+    <title>Ticket System - Admin | <?= $title; ?></title>
 
     <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/css/fonts.css" rel="stylesheet">
@@ -115,26 +115,26 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
+                            <a class="nav-link <?= ($title === 'Dashboard') ? 'active' : ''; ?>" aria-current="page" href="<?= base_url(); ?>admin/dashboard">
                                 <span data-feather="home"></span>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file"></span>
+                            <a class="nav-link <?= ($title === 'Tickets') ? 'active' : ''; ?>" href="<?= base_url() ?>admin/tickets">
+                                <span class="fas fa-ticket-alt"></span>
                                 Tickets
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file"></span>
+                            <a class="nav-link <?= ($title === 'Department') ? 'active' : ''; ?>" href="<?= base_url() ?>admin/department">
+                                <span class="fas fa-bars"></span>
                                 Department
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="shopping-cart"></span>
+                            <a class="nav-link <?= ($title === 'Accounts') ? 'active' : ''; ?>" href="<?= base_url() ?>admin/accounts">
+                                <span class="fas fa-users"></span>
                                 Accounts
                             </a>
                         </li>
@@ -143,187 +143,5 @@
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h4>Dashboard</h4>
+                    <h4><?= $title; ?></h4>
                 </div>
-
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card border-0">
-                            <div class="card-counter primary">
-                                <i class="fa fa-ticket-alt"></i>
-                                <span class="count-numbers">0</span>
-                                <span class="count-name">Today's Tickets</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="card border-0">
-                            <div class="card-counter success">
-                                <i class="fa fa-ticket-alt"></i>
-                                <span class="count-numbers">0</span>
-                                <span class="count-name">Open Tickets</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="card border-0">
-                            <div class="card-counter danger">
-                                <i class="fa fa-database"></i>
-                                <span class="count-numbers">0</span>
-                                <span class="count-name">Closed Tickets</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="card border-0">
-                            <div class="card-counter info">
-                                <i class="fa fa-ticket-alt"></i>
-                                <span class="count-numbers">0</span>
-                                <span class="count-name">Total Tickets</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h4 class="mt-2">Today's Tickets</h4>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>random</td>
-                                <td>data</td>
-                                <td>placeholder</td>
-                                <td>text</td>
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>placeholder</td>
-                                <td>irrelevant</td>
-                                <td>visual</td>
-                                <td>layout</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>data</td>
-                                <td>rich</td>
-                                <td>dashboard</td>
-                                <td>tabular</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>information</td>
-                                <td>placeholder</td>
-                                <td>illustrative</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,004</td>
-                                <td>text</td>
-                                <td>random</td>
-                                <td>layout</td>
-                                <td>dashboard</td>
-                            </tr>
-                            <tr>
-                                <td>1,005</td>
-                                <td>dashboard</td>
-                                <td>irrelevant</td>
-                                <td>text</td>
-                                <td>placeholder</td>
-                            </tr>
-                            <tr>
-                                <td>1,006</td>
-                                <td>dashboard</td>
-                                <td>illustrative</td>
-                                <td>rich</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,007</td>
-                                <td>placeholder</td>
-                                <td>tabular</td>
-                                <td>information</td>
-                                <td>irrelevant</td>
-                            </tr>
-                            <tr>
-                                <td>1,008</td>
-                                <td>random</td>
-                                <td>data</td>
-                                <td>placeholder</td>
-                                <td>text</td>
-                            </tr>
-                            <tr>
-                                <td>1,009</td>
-                                <td>placeholder</td>
-                                <td>irrelevant</td>
-                                <td>visual</td>
-                                <td>layout</td>
-                            </tr>
-                            <tr>
-                                <td>1,010</td>
-                                <td>data</td>
-                                <td>rich</td>
-                                <td>dashboard</td>
-                                <td>tabular</td>
-                            </tr>
-                            <tr>
-                                <td>1,011</td>
-                                <td>information</td>
-                                <td>placeholder</td>
-                                <td>illustrative</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,012</td>
-                                <td>text</td>
-                                <td>placeholder</td>
-                                <td>layout</td>
-                                <td>dashboard</td>
-                            </tr>
-                            <tr>
-                                <td>1,013</td>
-                                <td>dashboard</td>
-                                <td>irrelevant</td>
-                                <td>text</td>
-                                <td>visual</td>
-                            </tr>
-                            <tr>
-                                <td>1,014</td>
-                                <td>dashboard</td>
-                                <td>illustrative</td>
-                                <td>rich</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,015</td>
-                                <td>random</td>
-                                <td>tabular</td>
-                                <td>information</td>
-                                <td>text</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </main>
-        </div>
-    </div>
-
-
-    <script src="<?= base_url(); ?>assets/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url(); ?>assets/js/feather.min.js"></script>
-    <script src="<?= base_url(); ?>assets/js/dashboard.js"></script>
-</body>
-
-</html>

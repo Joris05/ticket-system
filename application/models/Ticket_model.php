@@ -19,9 +19,9 @@ class Ticket_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->where('department_id', $id);
-        if($sdate){
-            $this->db->where('date_created >=', $sdate);
-            $this->db->where('date_created <=', $edate);
+        if ($sdate) {
+            $this->db->where('DATE(date_created) >=', $sdate);
+            $this->db->where('DATE(date_created) <=', $edate);
         }
         $this->db->order_by('id', 'DEC');
         $q = $this->db->get('tickets');
@@ -32,10 +32,10 @@ class Ticket_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->where('department_id', $id);
-        if($status){
+        if ($status) {
             $this->db->where('status', $status);
         }
-        if($sdate){
+        if ($sdate) {
             $this->db->where('date_created >=', $sdate);
             $this->db->where('date_created <=', $edate);
         }

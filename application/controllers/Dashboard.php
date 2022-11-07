@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+date_default_timezone_set('Asia/Manila');
 class Dashboard extends CI_Controller
 {
 
@@ -25,7 +25,7 @@ class Dashboard extends CI_Controller
         $data['title'] = 'Home';
         $data['open'] = count($this->ticket->ticket_by_deparment_status($this->session->userdata('department_id'), 'Open'));
         $data['close'] = count($this->ticket->ticket_by_deparment_status($this->session->userdata('department_id'), 'Partially closed'));
-        $data['tickets'] = $this->ticket->ticket_list_by_department($this->session->userdata('department_id'));
+        $data['tickets'] = $this->ticket->ticket_list_by_department($this->session->userdata('department_id'), date("Y-m-d"), date("Y-m-d"));
         $this->load->view('template/header', $data);
         $this->load->view('pages/home', $data);
         $this->load->view('template/footer');
