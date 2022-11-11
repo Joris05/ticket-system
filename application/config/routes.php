@@ -24,7 +24,7 @@ $route['admin/user/create'] = 'admin/createUser';
 $route['admin/user/store'] = 'admin/storeUser';
 $route['admin/delete/user/(:any)'] = 'admin/deleteUser/$1';
 $route['admin/edit/user/(:any)'] = 'admin/editUser/$1';
-$route['admin/user/update'] = 'admin/updateStore';
+$route['admin/user/update'] = 'admin/updateUser';
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';

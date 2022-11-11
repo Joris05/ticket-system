@@ -25,6 +25,10 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['title'] = 'Dashboard';
+        $data['close'] = count($this->ticket->ticket_by_deparment_status(null, 'Partially closed'));
+        $data['open'] = count($this->ticket->ticket_by_deparment_status(null, 'Open'));
+        $data['all'] = count($this->ticket->ticket_by_deparment_status());
+        $data['today'] = count($this->ticket->ticket_by_deparment_status(null, null, date('Y-m-d'), date('Y-m-d')));
         $this->load->view('template/admin_header', $data);
         $this->load->view('pages/admin_dashboard');
         $this->load->view('template/admin_footer');
@@ -124,7 +128,7 @@ class Admin extends CI_Controller
                     redirect('admin/department');
                 } else {
                     $errors = '<li>Unable to save department.</li>';
-                    $this->editDepartment($errors);
+                    $this->editDepartment($id, $errors);
                 }
             }
         }
@@ -220,7 +224,7 @@ class Admin extends CI_Controller
                     redirect('admin/accounts');
                 } else {
                     $errors = '<li>Unable to save user.</li>';
-                    $this->createDepartment($errors);
+                    $this->createUser($errors);
                 }
             }
         }
@@ -253,7 +257,7 @@ class Admin extends CI_Controller
         }
     }
 
-    public function updateStore()
+    public function updateUser()
     {
 
         $this->form_validation->set_rules(
@@ -266,11 +270,11 @@ class Admin extends CI_Controller
             'Username',
             'required|trim'
         );
-        $this->form_validation->set_rules(
-            'password',
-            'Password',
-            'required|trim'
-        );
+        // $this->form_validation->set_rules(
+        //     'password',
+        //     'Password',
+        //     'required|trim'
+        // );
         $this->form_validation->set_rules(
             'department',
             'Department',
@@ -298,11 +302,24 @@ class Admin extends CI_Controller
 
             if ($check) {
                 $errors = "<li>User's name is already exist.</li>";
-                $this->createUser($errors);
+                $this->editUser($id, $errors);
             } else if ($check1) {
                 $errors = "<li>User's username is already exist.</li>";
-                $this->createUser($errors);
+                $this->editUser($id, $errors);
             } else {
+                $data = array(
+                    'username' => $username,
+                    'name' => $name,
+                    'department_id' => $department,
+                    'user_type' => $utype
+                );
+                $update  = $this->user->update_user($data ,'user_id = "'.$id.'"');
+                if ($update) {
+                    redirect('admin/accounts');
+                } else {
+                    $errors = '<li>Unable to update user.</li>';
+                    $this->editUser($id, $errors);
+                }
             }
         }
     }

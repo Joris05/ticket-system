@@ -3,7 +3,7 @@
         <div class="card border-0">
             <div class="card-counter primary">
                 <i class="fa fa-ticket-alt"></i>
-                <span class="count-numbers">0</span>
+                <span class="count-numbers"><?= $today;?></span>
                 <span class="count-name">Today's Tickets</span>
             </div>
         </div>
@@ -13,7 +13,7 @@
         <div class="card border-0">
             <div class="card-counter success">
                 <i class="fa fa-ticket-alt"></i>
-                <span class="count-numbers">0</span>
+                <span class="count-numbers"><?= $open; ?></span>
                 <span class="count-name">Open Tickets</span>
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="card border-0">
             <div class="card-counter danger">
                 <i class="fa fa-database"></i>
-                <span class="count-numbers">0</span>
+                <span class="count-numbers"><?= $close; ?></span>
                 <span class="count-name">Closed Tickets</span>
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="card border-0">
             <div class="card-counter info">
                 <i class="fa fa-ticket-alt"></i>
-                <span class="count-numbers">0</span>
+                <span class="count-numbers"><?= $all; ?></span>
                 <span class="count-name">Total Tickets</span>
             </div>
         </div>

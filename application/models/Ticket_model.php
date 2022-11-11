@@ -28,16 +28,18 @@ class Ticket_model extends CI_Model
         return $q->result_array();
     }
 
-    public function ticket_by_deparment_status($id, $status = null, $sdate = null, $edate = null)
+    public function ticket_by_deparment_status($id = null, $status = null, $sdate = null, $edate = null)
     {
         $this->db->select('*');
-        $this->db->where('department_id', $id);
+        if($id){
+            $this->db->where('department_id', $id);
+        }
         if ($status) {
             $this->db->where('status', $status);
         }
         if ($sdate) {
-            $this->db->where('date_created >=', $sdate);
-            $this->db->where('date_created <=', $edate);
+            $this->db->where('DATE(date_created) >=', $sdate);
+            $this->db->where('DATE(date_created) <=', $edate);
         }
         $this->db->order_by('id', 'DEC');
         $q = $this->db->get('tickets');
