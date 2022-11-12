@@ -10,6 +10,7 @@ class Ticket extends CI_Controller
         $this->load->model('department_model', 'department');
         $this->load->model('ticket_model', 'ticket');
         $this->load->model('user_model', 'user');
+        $this->load->model('comments_model', 'comment');
         $this->check_isvalidated();
     }
 
@@ -30,7 +31,7 @@ class Ticket extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    public function list($cond)
+    public function lists($cond)
     {
         if (!empty($cond)) {
             $data['title'] = 'All Tickets';
@@ -104,7 +105,7 @@ class Ticket extends CI_Controller
                 );
                 $insert  = $this->ticket->insert_ticket($data);
                 if ($insert) {
-                    $this->list('all');
+                    $this->lists('all');
                 } else {
                     $errors = '<li>Unable to submit your request. please contact the IT System Adminstrator.</li>';
                     $this->create($errors);
@@ -117,11 +118,15 @@ class Ticket extends CI_Controller
     {
         if ($id) {
             $data['title'] = 'View Ticket';
+            $data['id'] = $id;
+            $data['comments'] = $this->comment->comment_list($id);
             $this->load->view('template/header', $data);
             if ($this->ticket->get_ticket($id, $this->session->userdata('department_id'))) {
                 $data['ticket'] = $this->ticket->get_ticket($id, $this->session->userdata('department_id'));
-                $this->load->view('pages/view_ticket', $data);
+            } else {
+                $data['ticket'] = $this->ticket->get_ticket($id, $this->session->userdata('userid'));
             }
+            $this->load->view('pages/view_ticket', $data);
             $this->load->view('template/footer');
         }
     }
@@ -144,5 +149,34 @@ class Ticket extends CI_Controller
             $this->ticket->update_ticket($data, $where);
             $this->view($id);
         }
+    }
+
+    public function storeComment()
+    {
+        $this->form_validation->set_rules(
+            'msg',
+            'Comments',
+            'required|trim'
+        );
+        if ($this->form_validation->run() == FALSE) {
+            $errors = validation_errors('<li>', '</li>');
+            $this->create($errors);
+        } else {
+            $msg = $this->input->post('msg');
+            $id = $this->input->post('id');
+            $data = array(
+                'ticket_id' => $id,
+                'msg' => $msg,
+                'user_id' => $this->session->userdata('userid')
+            );
+            $insert = $this->comment->insert_comment($data);
+            if($insert){
+                $errors = '<li>Your comment was successfully submitted.</li>';
+               redirect('ticket/view/' . $id);
+            } else {
+                $errors = '<li>Unable to submit your comment. please contact the IT System Adminstrator.</li>';
+            }
+        }
+
     }
 }

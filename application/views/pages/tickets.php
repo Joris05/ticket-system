@@ -16,7 +16,7 @@
                 foreach ($tickets as $ticket) {
                     $color = ($ticket['status'] === 'Open') ? 'text-success' : 'text-danger';
                 ?>
-                    <tr>
+                    <tr onclick="window.location='<?= base_url(); ?>ticket/view/<?= $ticket['id']; ?>'">
                         <td><?= $ticket['title']; ?></td>
                         <td><?= $ticket['msg']; ?></td>
                         <td><?= date('F d, Y h:ia', strtotime($ticket['date_created'])); ?></td>

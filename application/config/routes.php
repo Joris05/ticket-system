@@ -5,11 +5,12 @@ $route['checkUser'] = 'login';
 $route['dashboard'] = 'dashboard';
 $route['logout']    = 'dashboard/logout';
 $route['create']    =  'ticket/create';
-$route['tickets/(:any)']   = 'ticket/list/$1';
+$route['tickets/(:any)']   = 'ticket/lists/$1';
 $route['ticket/store'] = 'ticket/store';
 $route['ticket/view/(:any)'] = 'ticket/view/$1';
 $route['ticket/status/(:any)/(:any)'] = 'ticket/status/$1/$2';
 $route['tickets/filter/(:any)/(:any)'] = 'ticket/filter/$1/$2';
+$route['ticket/comment/store']  = 'ticket/storeComment';
 
 $route['admin/dashboard']   = 'admin/index';
 $route['admin/department']  = 'admin/department';

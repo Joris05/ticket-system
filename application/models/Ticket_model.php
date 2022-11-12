@@ -73,6 +73,15 @@ class Ticket_model extends CI_Model
         return $q->row();
     }
 
+    public function get_ticket_by_user($id, $userid)
+    {
+        $this->db->select('*');
+        $this->db->where('id', $id);
+        $this->db->where('user_id', $userid);
+        $q = $this->db->get('tickets');
+        return $q->row();
+    }
+
     public function get_ticket_title($title, $status)
     {
         $this->db->select('*');
