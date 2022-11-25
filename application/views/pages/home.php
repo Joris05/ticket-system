@@ -53,7 +53,7 @@
                 foreach ($tickets as $ticket) {
                     $color = ($ticket['status'] === 'Open') ? 'text-success' : 'text-danger';
                     $user = $this->user->get_user($ticket['user_id']);
-                    $department = $this->department->get_deparment($user->department_id);
+                    $department = $this->department->get_department($user->department_id);
                 ?>
                     <tr onclick="window.location='<?= base_url(); ?>ticket/view/<?= $ticket['id']; ?>'">
                         <td><?= $ticket['title']; ?></td>

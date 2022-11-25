@@ -28,7 +28,7 @@ class Ticket_model extends CI_Model
         return $q->result_array();
     }
 
-    public function ticket_by_deparment_status($id = null, $status = null, $sdate = null, $edate = null)
+    public function ticket_by_department_status($id = null, $status = null, $sdate = null, $edate = null)
     {
         $this->db->select('*');
         if($id){
@@ -87,6 +87,14 @@ class Ticket_model extends CI_Model
         $this->db->select('*');
         $this->db->where('title', $title);
         $this->db->where('status', $status);
+        $q = $this->db->get('tickets');
+        return $q->row();
+    }
+
+    public function get_ticket_info($id)
+    {
+        $this->db->select('*');
+        $this->db->where('id', $id);
         $q = $this->db->get('tickets');
         return $q->row();
     }

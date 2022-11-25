@@ -44,19 +44,4 @@
             </div>
         </div>
     </div>
-    <!-- <button type="button" <?= ($ticket->status === 'Open') ? 'disabled' : 'onclick=window.location="' . base_url() . 'ticket/status/' . $ticket->id . '/open"' ?> class="btn btn-success">Open</button> -->
-    <?php
-      if($ticket->status === 'Open' && $ticket->department_id === $this->session->userdata('department_id')){ 
-    ?>
-    <form action="<?= base_url(); ?>ticket/comment/store" method="post">
-        <div class="mb-3">
-            <input type="hidden" name="id" value="<?= @$id;?>">
-            <textarea class="form-control" name="msg" rows="10" placeholder="Enter you comments here..." required /></textarea>
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Submit Comment</button>
-            <button type="button" onclick="window.location='<?= base_url() . 'ticket/status/' . $ticket->id ?>/close'" class="btn btn-danger float-end mb-3">Partially Close</button>   
-        </div>
-    </form>
-    <?php } ?>
 </div>

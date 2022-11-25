@@ -18,6 +18,17 @@
                     </select>
                 </div>
                 <div class="mb-3">
+                    <label class="form-label">Priority Level</label>
+                    <select class="form-select" name="priority" required />
+                    <option value="">Select</option>
+                    <option value="Red Flag">Red Flag</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Message</label>
                     <textarea class="form-control" name="msg" rows="10" placeholder="Enter you message here..." required /></textarea>
                 </div>

@@ -47,6 +47,7 @@
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Message</th>
+                <th scope="col">Priority</th>
                 <th scope="col">Department</th>
                 <th scope="col">Date Submitted</th>
                 <th scope="col">Date Close</th>
@@ -54,14 +55,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1,001</td>
-                <td>random</td>
-                <td>data</td>
-                <td>placeholder</td>
-                <td>text</td>
-                <td>text</td>
-            </tr>
+            <?php
+                foreach ($alltickets as $tickets){
+                    $color = ($tickets['status'] === 'Open') ? 'text-success' : 'text-danger';
+                    $user = $this->user->get_user($tickets['user_id']);
+                    $department = $this->department->get_department($user->department_id);
+                ?>
+                    <tr onclick="window.location='<?= base_url(); ?>admin/ticket/view/<?= $tickets['id']; ?>'">
+                        <td><?= $tickets['title']; ?></td>
+                        <td><?= $tickets['msg']; ?></td>
+                        <td><?= $tickets['priority']; ?></td>
+                        <td><?= @$department->department_name; ?></td>
+                        <td><?= date('F d, Y h:ia', strtotime($tickets['date_created'])); ?></td>
+                        <td><?= date('F d, Y h:ia', strtotime($tickets['date_modified'])); ?></td>
+                        <td class="<?= $color; ?>"><?= $tickets['status']; ?></td>
+                    </tr>
+            <?php } ?>
         </tbody>
     </table>
 </div>

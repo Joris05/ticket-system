@@ -20,6 +20,9 @@ $route['admin/edit/department/(:any)'] = 'admin/editDepartment/$1';
 $route['admin/delete/department/(:any)'] = 'admin/deleteDepartment/$1';
 $route['admin/department/update'] = 'admin/updateDepartment';
 
+$route['admin/tickets/(:any)'] = 'admin/tickets/$1';
+$route['admin/ticket/view/(:any)'] = 'admin/viewTicket/$1';
+
 $route['admin/accounts']    = 'admin/accounts';
 $route['admin/user/create'] = 'admin/createUser';
 $route['admin/user/store'] = 'admin/storeUser';

@@ -82,6 +82,11 @@ class Ticket extends CI_Controller
             'Message',
             'required|trim'
         );
+        $this->form_validation->set_rules(
+            'priority',
+            'Priority Level',
+            'required|trim'
+        );
 
         if ($this->form_validation->run() == FALSE) {
             $errors = validation_errors('<li>', '</li>');
@@ -90,6 +95,7 @@ class Ticket extends CI_Controller
             $title = $this->input->post('title');
             $department = $this->input->post('department');
             $msg = $this->input->post('msg');
+            $priority = $this->input->post('priority');
 
             $check = $this->ticket->get_ticket_title($title, 'Open');
 
@@ -101,6 +107,7 @@ class Ticket extends CI_Controller
                     'title' => $title,
                     'msg' => $msg,
                     'department_id' => $department,
+                    'priority' => $priority,
                     'user_id' => $this->session->userdata('userid'),
                 );
                 $insert  = $this->ticket->insert_ticket($data);
@@ -124,7 +131,7 @@ class Ticket extends CI_Controller
             if ($this->ticket->get_ticket($id, $this->session->userdata('department_id'))) {
                 $data['ticket'] = $this->ticket->get_ticket($id, $this->session->userdata('department_id'));
             } else {
-                $data['ticket'] = $this->ticket->get_ticket($id, $this->session->userdata('userid'));
+                $data['ticket'] = $this->ticket->get_ticket_by_user($id, $this->session->userdata('userid'));
             }
             $this->load->view('pages/view_ticket', $data);
             $this->load->view('template/footer');

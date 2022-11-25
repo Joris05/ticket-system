@@ -7,6 +7,7 @@
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Message</th>
+                    <th scope="col">Priority</th>
                     <th scope="col">Date</th>
                     <th scope="col">Status</th>
                 </tr>
@@ -19,6 +20,7 @@
                     <tr onclick="window.location='<?= base_url(); ?>ticket/view/<?= $ticket['id']; ?>'">
                         <td><?= $ticket['title']; ?></td>
                         <td><?= $ticket['msg']; ?></td>
+                        <td><?= $ticket['priority']; ?></td>
                         <td><?= date('F d, Y h:ia', strtotime($ticket['date_created'])); ?></td>
                         <td class="<?= $color; ?>"><?= $ticket['status']; ?></td>
                     </tr>
@@ -61,6 +63,7 @@
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Message</th>
+                <th scope="col">Priority</th>
                 <th scope="col">Department</th>
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
@@ -76,6 +79,7 @@
                 <tr onclick="window.location='<?= base_url(); ?>ticket/view/<?= $tickets['id']; ?>'">
                     <td><?= $tickets['title']; ?></td>
                     <td><?= $tickets['msg']; ?></td>
+                    <td><?= $tickets['priority']; ?></td>
                     <td><?= @$department->department_name; ?></td>
                     <td><?= date('F d, Y h:ia', strtotime($tickets['date_created'])); ?></td>
                     <td class="<?= $color; ?>"><?= $tickets['status']; ?></td>

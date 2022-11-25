@@ -104,7 +104,7 @@
         </button>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="#">Sign out</a>
+                <a class="nav-link px-3" href="<?= base_url(); ?>logout">Sign out</a>
             </div>
         </div>
     </header>
@@ -121,7 +121,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($title === 'Tickets') ? 'active' : ''; ?>" href="<?= base_url() ?>admin/tickets">
+                            <a class="nav-link <?= ($title === 'Tickets') ? 'active' : ''; ?>" href="<?= base_url() ?>admin/tickets/open">
                                 <span class="fas fa-ticket-alt"></span>
                                 Tickets
                             </a>

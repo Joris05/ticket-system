@@ -10,6 +10,7 @@ class Admin extends CI_Controller
         $this->load->model('department_model', 'department');
         $this->load->model('ticket_model', 'ticket');
         $this->load->model('user_model', 'user');
+        $this->load->model('comments_model', 'comment');
         $this->check_isvalidated();
     }
 
@@ -25,10 +26,11 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['title'] = 'Dashboard';
-        $data['close'] = count($this->ticket->ticket_by_deparment_status(null, 'Partially closed'));
-        $data['open'] = count($this->ticket->ticket_by_deparment_status(null, 'Open'));
-        $data['all'] = count($this->ticket->ticket_by_deparment_status());
-        $data['today'] = count($this->ticket->ticket_by_deparment_status(null, null, date('Y-m-d'), date('Y-m-d')));
+        $data['close'] = count($this->ticket->ticket_by_department_status(null, 'Partially closed'));
+        $data['open'] = count($this->ticket->ticket_by_department_status(null, 'Open'));
+        $data['all'] = count($this->ticket->ticket_by_department_status());
+        $data['alltickets'] = $this->ticket->ticket_by_department_status(null, null, date('Y-m-d'), date('Y-m-d'));
+        $data['today'] = count($this->ticket->ticket_by_department_status(null, null, date('Y-m-d'), date('Y-m-d')));
         $this->load->view('template/admin_header', $data);
         $this->load->view('pages/admin_dashboard');
         $this->load->view('template/admin_footer');
@@ -321,6 +323,31 @@ class Admin extends CI_Controller
                     $this->editUser($id, $errors);
                 }
             }
+        }
+    }
+
+    public function tickets($stat)
+    {
+        if($stat){
+            $data['title'] = 'Tickets';
+            $data['stat'] = $stat;
+            $stat = ($stat === 'closed') ? 'Partially closed' : 'Open';
+            $data['alltickets'] = $this->ticket->ticket_by_department_status(null, $stat, null, null);
+            $this->load->view('template/admin_header', $data);
+            $this->load->view('pages/admin_tickets');
+            $this->load->view('template/admin_footer');
+        }
+    }
+
+    public function viewTicket($id)
+    {
+        if($id){
+            $data['title'] = 'View Tickets';
+            $data['comments'] = $this->comment->comment_list($id);
+            $data['ticket'] = $this->ticket->get_ticket_info($id);
+            $this->load->view('template/admin_header', $data);
+            $this->load->view('pages/admin_view_ticket', $data);
+            $this->load->view('template/admin_footer');
         }
     }
 }
